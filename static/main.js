@@ -104,7 +104,7 @@ $('#send_button').on('click', function (e) {
 	console.log('SOY REQUESTBODY', requestBody);
 	
     // Realizar el POST al backend con el mensaje del usuario y el thread_id si está disponible
-    fetch('https://agente-soc-git-soc.apps.focus-ocp-sno.datco.net/assistant/technical', {
+    fetch('https://chatbot3-soc-soc.apps.focus-ocp-sno.datco.net/assistant/technical', {
         method: 'POST',
         headers: {
 			'Content-Type': 'application/json',
