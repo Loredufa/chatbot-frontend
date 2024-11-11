@@ -104,17 +104,17 @@ $('#send_button').on('click', function (e) {
 	console.log('SOY REQUESTBODY', requestBody);
 	
     // Realizar el POST al backend con el mensaje del usuario y el thread_id si está disponible
-    fetch(config.backendUrl, {
+    fetch('https://agente-soc-git-soc.apps.focus-ocp-sno.datco.net/assistant/technical', {
         method: 'POST',
         headers: {
 			'Content-Type': 'application/json',
-			'x-access-token': config.accessToken
+			'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.WMflh3i55Zja3beHX2D5Qnh3dP8HNDTqlsmRC0TdNds"
 		},
         body: JSON.stringify(requestBody), 
     })
     .then(response => response.json())  // Convertir la respuesta a JSON
     .then(data => {
-		console.log(data);
+		console.log('SOY DATA', data);
 
         // Guardar el thread_id en sessionStorage si está presente en la respuesta
         if (data.thread_id) {
@@ -122,7 +122,7 @@ $('#send_button').on('click', function (e) {
         }
 
         // Mostrar la respuesta del backend como mensaje del bot
-        showBotMessage(data.message);
+        showBotMessage(data.response);
     })
     .catch(error => {
         // Manejar cualquier error de la solicitud
