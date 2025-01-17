@@ -135,7 +135,7 @@ $('#send_button').on('click', function (e) {
  * Set initial bot message to the screen for the user.
  */
 $(window).on('load', function () {
-	showBotMessage('Hola, soy tu asistente virtual. ¿En qué puedo ayudarte?');
+	showBotMessage('Hola, ¿En qué puedo ayudarte?');
 });
 
 // Limpiar el thread_id de sessionStorage cuando la página se refresca
