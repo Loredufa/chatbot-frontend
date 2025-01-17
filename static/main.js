@@ -20,15 +20,17 @@ function renderMessageToScreen(args) {
 	let messagesContainer = $('.messages');
 
 	// init element
-	let message = $(`
-	<li class="message ${args.message_side}">
-		<div class="avatar"></div>
-		<div class="text_wrapper">
-			<div class="text">${args.text}</div>
-			<div class="timestamp">${displayDate}</div>
-		</div>
-	</li>
-	`);
+    let message = $(`
+        <li class="message ${args.message_side}">
+            <div class="avatar"></div>
+            <div class="text_wrapper">
+                <div class="text"></div> <!-- Deja el contenedor vacío -->
+                <div class="timestamp">${displayDate}</div>
+            </div>
+        </li>
+        `);
+        message.find('.text').html(args.text); // Inserta el contenido como HTML
+        
 
 	// add to parent
 	messagesContainer.append(message);
@@ -68,9 +70,12 @@ function showUserMessage(message, datetime) {
 /**
  * Displays the chatbot message on the chat screen. This is the left side message.
  */
+console.log('Contenido de marked:', marked);
 function showBotMessage(message, datetime) {
+    // Procesar el mensaje para convertir Markdown a HTML
+    let formattedMessage = marked.parse(message);
 	renderMessageToScreen({
-		text: message,
+		text: formattedMessage,
 		time: datetime,
 		message_side: 'left',
 	});
@@ -104,7 +109,7 @@ $('#send_button').on('click', function (e) {
 	console.log('SOY REQUESTBODY', requestBody);
 	
     // Realizar el POST al backend con el mensaje del usuario y el thread_id si está disponible
-    fetch('https://chatbot3-soc-soc.apps.focus-ocp-sno.datco.net/assistant/technical', {
+    fetch('http://localhost:5000/assistant', {
         method: 'POST',
         headers: {
 			'Content-Type': 'application/json',
